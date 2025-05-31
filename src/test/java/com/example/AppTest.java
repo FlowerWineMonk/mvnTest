@@ -1,38 +1,23 @@
 package com.example;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import com.google.gson.Gson;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+public class AppTest {
+
+    @Test
+    public void testPersonFields() {
+        Person person = new Person("Alice", 25);
+        assertEquals("Alice", person.name);
+        assertEquals(25, person.age);
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void testGsonSerialization() {
+        Person person = new Person("Alice", 25);
+        Gson gson = new Gson();
+        String json = gson.toJson(person);
+        assertEquals("{\"name\":\"Alice\",\"age\":25}", json);
     }
 }
